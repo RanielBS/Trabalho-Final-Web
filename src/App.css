@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.container {
+  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  min-height: 100vh;
+}
+
+.menu {
+  background-color: #eeeeee;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+}
+
+.menu button {
+  margin-right: 10px;
+}
+
+.formulario {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  background-color: #fafafa;
+}
+
+input {
+  padding: 8px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+button {
+  padding: 8px 12px;
+  margin: 3px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #eeeeee;
+}
+
+li {
+  margin-bottom: 8px;
+}
