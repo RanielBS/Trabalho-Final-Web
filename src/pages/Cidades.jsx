@@ -69,36 +69,60 @@ function Cidades() {
   }
 
   return (
-    <div>
-      <h2>Gestão de Cidades</h2>
-
-      <div className="formulario">
-        <h3>{editandoId ? 'Editar Cidade' : 'Nova Cidade'}</h3>
-        <input
-          type="text"
-          placeholder="Nome da Cidade"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-        />
-
-        <button onClick={salvar}>{editandoId ? 'Atualizar' : 'Cadastrar'}</button>
-        {editandoId && <button onClick={limparFormulario}>Cancelar</button>}
+    <section className="pagina">
+      <div className="cabecalho-pagina">
+        <div>
+          <span className="etiqueta">Cadastro</span>
+          <h2>Gestão de Cidades</h2>
+          <p>Controle as cidades vinculadas às operações da mineradora.</p>
+        </div>
+        <strong className="contador">{cidades.length} registros</strong>
       </div>
 
-      <h3>Cidades Cadastradas</h3>
-      <p>Total: {cidades.length}</p>
-      {carregando && <p>Carregando dados...</p>}
+      <div className="painel formulario">
+        <h3>{editandoId ? 'Editar cidade' : 'Nova cidade'}</h3>
+        <div className="form-grid">
+          <input
+            type="text"
+            placeholder="Nome da cidade"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+          />
 
-      <ul>
-        {cidades.map((cidade) => (
-          <li key={cidade.id}>
-            {cidade.nome}{' '}
-            <button onClick={() => editar(cidade)}>Editar</button>{' '}
-            <button onClick={() => excluir(cidade.id)}>Excluir</button>
-          </li>
-        ))}
-      </ul>
-    </div>
+          <button onClick={salvar}>{editandoId ? 'Atualizar' : 'Cadastrar'}</button>
+          {editandoId && <button className="botao-secundario" onClick={limparFormulario}>Cancelar</button>}
+        </div>
+      </div>
+
+      <div className="painel">
+        <div className="titulo-lista">
+          <h3>Cidades cadastradas</h3>
+          {carregando && <span>Carregando...</span>}
+        </div>
+
+        <div className="tabela-responsiva">
+          <table>
+            <thead>
+              <tr>
+                <th>Cidade</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cidades.map((cidade) => (
+                <tr key={cidade.id}>
+                  <td>{cidade.nome}</td>
+                  <td className="acoes">
+                    <button onClick={() => editar(cidade)}>Editar</button>
+                    <button className="botao-perigo" onClick={() => excluir(cidade.id)}>Excluir</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
   )
 }
 

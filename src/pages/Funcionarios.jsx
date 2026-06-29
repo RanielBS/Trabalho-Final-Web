@@ -72,43 +72,69 @@ function Funcionarios() {
   }
 
   return (
-    <div>
-      <h2>Gestão de Funcionários</h2>
-
-      <div className="formulario">
-        <h3>{editandoId ? 'Editar Funcionário' : 'Novo Funcionário'}</h3>
-        <input
-          type="text"
-          placeholder="Nome do Funcionário"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-        />
-
-        <input
-          type="text"
-          placeholder="Cargo"
-          value={cargo}
-          onChange={(e) => setCargo(e.target.value)}
-        />
-
-        <button onClick={salvar}>{editandoId ? 'Atualizar' : 'Cadastrar'}</button>
-        {editandoId && <button onClick={limparFormulario}>Cancelar</button>}
+    <section className="pagina">
+      <div className="cabecalho-pagina">
+        <div>
+          <span className="etiqueta">Cadastro</span>
+          <h2>Gestão de Funcionários</h2>
+          <p>Gerencie colaboradores responsáveis pelas atividades da mineradora.</p>
+        </div>
+        <strong className="contador">{funcionarios.length} registros</strong>
       </div>
 
-      <h3>Funcionários Cadastrados</h3>
-      <p>Total: {funcionarios.length}</p>
-      {carregando && <p>Carregando dados...</p>}
+      <div className="painel formulario">
+        <h3>{editandoId ? 'Editar funcionário' : 'Novo funcionário'}</h3>
+        <div className="form-grid">
+          <input
+            type="text"
+            placeholder="Nome do funcionário"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+          />
 
-      <ul>
-        {funcionarios.map((funcionario) => (
-          <li key={funcionario.id}>
-            <strong>{funcionario.nome}</strong> - Cargo: {funcionario.cargo}{' '}
-            <button onClick={() => editar(funcionario)}>Editar</button>{' '}
-            <button onClick={() => excluir(funcionario.id)}>Excluir</button>
-          </li>
-        ))}
-      </ul>
-    </div>
+          <input
+            type="text"
+            placeholder="Cargo"
+            value={cargo}
+            onChange={(e) => setCargo(e.target.value)}
+          />
+
+          <button onClick={salvar}>{editandoId ? 'Atualizar' : 'Cadastrar'}</button>
+          {editandoId && <button className="botao-secundario" onClick={limparFormulario}>Cancelar</button>}
+        </div>
+      </div>
+
+      <div className="painel">
+        <div className="titulo-lista">
+          <h3>Funcionários cadastrados</h3>
+          {carregando && <span>Carregando...</span>}
+        </div>
+
+        <div className="tabela-responsiva">
+          <table>
+            <thead>
+              <tr>
+                <th>Funcionário</th>
+                <th>Cargo</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {funcionarios.map((funcionario) => (
+                <tr key={funcionario.id}>
+                  <td>{funcionario.nome}</td>
+                  <td>{funcionario.cargo}</td>
+                  <td className="acoes">
+                    <button onClick={() => editar(funcionario)}>Editar</button>
+                    <button className="botao-perigo" onClick={() => excluir(funcionario.id)}>Excluir</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
   )
 }
 

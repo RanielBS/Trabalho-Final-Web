@@ -72,43 +72,69 @@ function Servicos() {
   }
 
   return (
-    <div>
-      <h2>Gestão de Serviços</h2>
-
-      <div className="formulario">
-        <h3>{editandoId ? 'Editar Serviço' : 'Novo Serviço'}</h3>
-        <input
-          type="text"
-          placeholder="Descrição do Serviço"
-          value={descricao}
-          onChange={(e) => setDescricao(e.target.value)}
-        />
-
-        <input
-          type="text"
-          placeholder="Responsável"
-          value={responsavel}
-          onChange={(e) => setResponsavel(e.target.value)}
-        />
-
-        <button onClick={salvar}>{editandoId ? 'Atualizar' : 'Cadastrar'}</button>
-        {editandoId && <button onClick={limparFormulario}>Cancelar</button>}
+    <section className="pagina">
+      <div className="cabecalho-pagina">
+        <div>
+          <span className="etiqueta">Cadastro</span>
+          <h2>Gestão de Serviços</h2>
+          <p>Acompanhe os serviços executados e seus responsáveis.</p>
+        </div>
+        <strong className="contador">{servicos.length} registros</strong>
       </div>
 
-      <h3>Serviços Cadastrados</h3>
-      <p>Total: {servicos.length}</p>
-      {carregando && <p>Carregando dados...</p>}
+      <div className="painel formulario">
+        <h3>{editandoId ? 'Editar serviço' : 'Novo serviço'}</h3>
+        <div className="form-grid">
+          <input
+            type="text"
+            placeholder="Descrição do serviço"
+            value={descricao}
+            onChange={(e) => setDescricao(e.target.value)}
+          />
 
-      <ul>
-        {servicos.map((servico) => (
-          <li key={servico.id}>
-            <strong>{servico.descricao}</strong> - Responsável: {servico.responsavel}{' '}
-            <button onClick={() => editar(servico)}>Editar</button>{' '}
-            <button onClick={() => excluir(servico.id)}>Excluir</button>
-          </li>
-        ))}
-      </ul>
-    </div>
+          <input
+            type="text"
+            placeholder="Responsável"
+            value={responsavel}
+            onChange={(e) => setResponsavel(e.target.value)}
+          />
+
+          <button onClick={salvar}>{editandoId ? 'Atualizar' : 'Cadastrar'}</button>
+          {editandoId && <button className="botao-secundario" onClick={limparFormulario}>Cancelar</button>}
+        </div>
+      </div>
+
+      <div className="painel">
+        <div className="titulo-lista">
+          <h3>Serviços cadastrados</h3>
+          {carregando && <span>Carregando...</span>}
+        </div>
+
+        <div className="tabela-responsiva">
+          <table>
+            <thead>
+              <tr>
+                <th>Serviço</th>
+                <th>Responsável</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {servicos.map((servico) => (
+                <tr key={servico.id}>
+                  <td>{servico.descricao}</td>
+                  <td>{servico.responsavel}</td>
+                  <td className="acoes">
+                    <button onClick={() => editar(servico)}>Editar</button>
+                    <button className="botao-perigo" onClick={() => excluir(servico.id)}>Excluir</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
   )
 }
 

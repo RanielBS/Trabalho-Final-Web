@@ -72,43 +72,69 @@ function Equipamentos() {
   }
 
   return (
-    <div>
-      <h2>Gestão de Equipamentos</h2>
-
-      <div className="formulario">
-        <h3>{editandoId ? 'Editar Equipamento' : 'Novo Equipamento'}</h3>
-        <input
-          type="text"
-          placeholder="Nome do Equipamento"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-        />
-
-        <input
-          type="text"
-          placeholder="Setor (Ex: Extração)"
-          value={setor}
-          onChange={(e) => setSetor(e.target.value)}
-        />
-
-        <button onClick={salvar}>{editandoId ? 'Atualizar' : 'Cadastrar'}</button>
-        {editandoId && <button onClick={limparFormulario}>Cancelar</button>}
+    <section className="pagina">
+      <div className="cabecalho-pagina">
+        <div>
+          <span className="etiqueta">Cadastro</span>
+          <h2>Gestão de Equipamentos</h2>
+          <p>Cadastre e acompanhe equipamentos utilizados nos setores da mineradora.</p>
+        </div>
+        <strong className="contador">{equipamentos.length} registros</strong>
       </div>
 
-      <h3>Equipamentos Cadastrados</h3>
-      <p>Total: {equipamentos.length}</p>
-      {carregando && <p>Carregando dados...</p>}
+      <div className="painel formulario">
+        <h3>{editandoId ? 'Editar equipamento' : 'Novo equipamento'}</h3>
+        <div className="form-grid">
+          <input
+            type="text"
+            placeholder="Nome do equipamento"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+          />
 
-      <ul>
-        {equipamentos.map((equipamento) => (
-          <li key={equipamento.id}>
-            <strong>{equipamento.nome}</strong> - Setor: {equipamento.setor}{' '}
-            <button onClick={() => editar(equipamento)}>Editar</button>{' '}
-            <button onClick={() => excluir(equipamento.id)}>Excluir</button>
-          </li>
-        ))}
-      </ul>
-    </div>
+          <input
+            type="text"
+            placeholder="Setor. Ex: Extração"
+            value={setor}
+            onChange={(e) => setSetor(e.target.value)}
+          />
+
+          <button onClick={salvar}>{editandoId ? 'Atualizar' : 'Cadastrar'}</button>
+          {editandoId && <button className="botao-secundario" onClick={limparFormulario}>Cancelar</button>}
+        </div>
+      </div>
+
+      <div className="painel">
+        <div className="titulo-lista">
+          <h3>Equipamentos cadastrados</h3>
+          {carregando && <span>Carregando...</span>}
+        </div>
+
+        <div className="tabela-responsiva">
+          <table>
+            <thead>
+              <tr>
+                <th>Equipamento</th>
+                <th>Setor</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {equipamentos.map((equipamento) => (
+                <tr key={equipamento.id}>
+                  <td>{equipamento.nome}</td>
+                  <td>{equipamento.setor}</td>
+                  <td className="acoes">
+                    <button onClick={() => editar(equipamento)}>Editar</button>
+                    <button className="botao-perigo" onClick={() => excluir(equipamento.id)}>Excluir</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
   )
 }
 

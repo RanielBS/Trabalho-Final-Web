@@ -11,15 +11,16 @@ function App() {
   const [pagina, setPagina] = useState('inicio')
 
   return (
-    <div className="container">
-      <Menu setPagina={setPagina} />
-      <hr />
+    <div className="app">
+      <Menu pagina={pagina} setPagina={setPagina} />
 
-      {pagina === 'inicio' && <Inicio />}
-      {pagina === 'equipamentos' && <Equipamentos />}
-      {pagina === 'cidades' && <Cidades />}
-      {pagina === 'funcionarios' && <Funcionarios />}
-      {pagina === 'servicos' && <Servicos />}
+      <main className="conteudo">
+        {pagina === 'inicio' && <Inicio setPagina={setPagina} />}
+        {pagina === 'equipamentos' && <Equipamentos />}
+        {pagina === 'cidades' && <Cidades />}
+        {pagina === 'funcionarios' && <Funcionarios />}
+        {pagina === 'servicos' && <Servicos />}
+      </main>
     </div>
   )
 }
