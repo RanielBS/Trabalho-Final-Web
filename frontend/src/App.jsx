@@ -24,8 +24,10 @@ function App() {
 
 <footer className="rodape">
   <strong> Sistema de Gerenciamento de Serviços de Mineração</strong>
-  <p>Controle de equipamentos, cidades, funcionários e serviços.</p>
-  <span>© 2026 • Universidade Federal do Ceará</span>
+  <p>Projeto Final • Sistemas de Informação
+Universidade Federal do Ceará-UFC
+</p>
+  <span>© 2026 • Universidade Federal do Ceará Campus Crateús</span>
 </footer>
     </div>
   )
