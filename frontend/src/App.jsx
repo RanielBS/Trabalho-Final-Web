@@ -21,6 +21,12 @@ function App() {
         {pagina === 'funcionarios' && <Funcionarios />}
         {pagina === 'servicos' && <Servicos />}
       </main>
+
+<footer className="rodape">
+  <strong> Sistema de Gerenciamento de Serviços de Mineração</strong>
+  <p>Controle de equipamentos, cidades, funcionários e serviços.</p>
+  <span>© 2026 • Universidade Federal do Ceará</span>
+</footer>
     </div>
   )
 }

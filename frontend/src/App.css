@@ -489,4 +489,32 @@ tr:hover td {
   .menu button {
     flex: 1;
   }
+
+}
+.rodape {
+  margin-top: 35px;
+  padding: 24px;
+  text-align: center;
+  background: linear-gradient(135deg, #12232e, #1f4336);
+  color: white;
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.rodape strong {
+  display: block;
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.rodape p {
+  margin: 4px 0;
+  color: #dbeafe;
+}
+
+.rodape span {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  color: #cbd5e1;
 }
