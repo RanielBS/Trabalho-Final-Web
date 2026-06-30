@@ -1,71 +1,102 @@
-# Sistema Integrado da Mineradora
+# Sistema Final Web - Mineradora
 
-Projeto final de Front-end utilizando React, Vite, Supabase e Netlify.
+Projeto com frontend em React, backend em Node.js/Express e banco de dados Supabase.
 
-## O que o sistema possui
+## Estrutura
 
-- Página inicial
-- Cadastro, listagem, edição e exclusão de cidades
-- Cadastro, listagem, edição e exclusão de equipamentos
-- Cadastro, listagem, edição e exclusão de funcionários
-- Cadastro, listagem, edição e exclusão de serviços
-- Integração com banco de dados Supabase
+```text
+SistemaFinalWeb-nodejs/
+├── frontend/   # React + Vite
+└── backend/    # Node.js + Express + Supabase
+```
 
-## Tabelas usadas no Supabase
+## Banco de dados no Supabase
+
+As tabelas esperadas são:
 
 ```sql
-CREATE TABLE cidades (
+create table if not exists cidades (
   id serial primary key,
   nome text
 );
 
-CREATE TABLE equipamentos (
+create table if not exists equipamentos (
   id serial primary key,
   nome text,
   setor text
 );
 
-CREATE TABLE funcionarios (
+create table if not exists funcionarios (
   id serial primary key,
   nome text,
   cargo text
 );
 
-CREATE TABLE servicos (
+create table if not exists servicos (
   id serial primary key,
   descricao text,
   responsavel text
 );
 ```
 
-## Como configurar
+## Configurar backend
 
-Crie um arquivo `.env` na raiz do projeto com:
+Entre na pasta `backend`, copie `.env.example` para `.env` e preencha:
 
 ```env
-VITE_SUPABASE_URL=https://SEU-PROJETO.supabase.co
-VITE_SUPABASE_ANON_KEY=SUA_CHAVE_ANON_PUBLIC
+PORT=3001
+SUPABASE_URL=https://ykwwsxrryvksgfomrytl.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=SUA_SERVICE_ROLE_KEY_AQUI
 ```
 
-Depois rode:
+A `SUPABASE_SERVICE_ROLE_KEY` deve ficar apenas no backend. Não envie essa chave para o GitHub.
+
+Instale e rode:
 
 ```bash
+cd backend
 npm install
 npm run dev
 ```
 
-## Publicação no Netlify
+## Configurar frontend
 
-Configurações:
+Entre na pasta `frontend`, copie `.env.example` para `.env`:
 
-- Build command: `npm run build`
-- Publish directory: `dist`
+```env
+VITE_API_URL=http://localhost:3001/api
+```
 
-No Netlify, cadastre também as variáveis de ambiente:
+Instale e rode:
 
-- `VITE_SUPABASE_URL`
-- `VITE_SUPABASE_ANON_KEY`
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-## Observação
+## Fluxo da aplicação
 
-Este projeto usa React conectado diretamente ao Supabase, sem backend separado, pois o objetivo da entrega é apresentar o front-end funcionando com banco de dados real e hospedagem no Netlify.
+```text
+React → Node.js/Express → Supabase → PostgreSQL
+```
+
+O React não acessa mais o Supabase diretamente. Ele chama as rotas do backend:
+
+- `GET /api/equipamentos`
+- `POST /api/equipamentos`
+- `PUT /api/equipamentos/:id`
+- `DELETE /api/equipamentos/:id`
+
+O mesmo padrão existe para `cidades`, `funcionarios` e `servicos`.
+
+## Deploy
+
+- Frontend: Netlify
+- Backend: Render ou Railway
+
+Ao publicar o backend, altere a variável do frontend:
+
+```env
+VITE_API_URL=https://URL-DO-SEU-BACKEND/api
+```
